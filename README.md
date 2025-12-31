@@ -1,6 +1,6 @@
 # Be Productive 🎯
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![Chrome](https://img.shields.io/badge/Chrome-Extension-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
@@ -10,20 +10,25 @@ Built using **Manifest V3**, this extension leverages native Chrome APIs to ensu
 
 ## 📸 Screenshots
 
-| Extension Popup | Blocked Screen |
-|:---:|:---:|
-| <img src="images/popup-ui.png" alt="Popup UI" width="300"> | <img src="images/block-page.png" alt="Blocked Page" width="400"> |
+| Extension Popup | Smart Search | Blocked Screen |
+|:---:|:---:|:---:|
+| <img src="images/popup-ui.png" alt="Popup UI" width="250"> | <img src="images/smart-search.png" alt="Smart Search" width="250"> | <img src="images/block-page.png" alt="Blocked Page" width="350"> |
 ## ✨ Features
 
+### **New in v1.1 🚀**
+* **🔍 Smart Autocomplete:** Instant search suggestions for the top 50+ most distracting websites (YouTube, Instagram, Reddit, etc.) so you don't have to type the full URL.
+* **🖼️ Visual Icons:** Automatically fetches and displays high-quality favicons for every blocked site using Google's S2 service.
+* **📜 Scrollable List:** A clean, scrollable view for managing long blocklists without cluttering the UI.
+
+### **Core Features**
 * **⚡ Instant Focus Mode:** Toggle blocking on/off instantly with a clean UI.
-* **🚫 Custom Blocklist:** Add or remove any website (e.g., `youtube.com`, `twitter.com`) to your personal blocklist.
-* **💪 Motivational Redirect:** Instead of a generic error, blocked pages redirect to a custom "Access Denied" page with motivational quotes.
+* **💪 Motivational Redirect:** Instead of a generic error, blocked pages redirect to a custom "Access Denied" page with motivational quotes to get you back on track.
 * **💾 Persistent Settings:** Uses `chrome.storage.sync` to save your preferences and blocklist across browser sessions.
 * **🔒 Privacy First:** No tracking. All data is stored locally on your device.
 
 ## 🛠️ Tech Stack
 
-* **HTML5 & CSS3** (Flexbox/Grid for layout)
+* **HTML5 & CSS3** (Flexbox/Grid, Custom Scrollbars, Animations)
 * **JavaScript (ES6+)**
 * **Chrome Extension APIs** (Manifest V3)
     * `chrome.tabs` (URL detection)
@@ -34,11 +39,10 @@ Built using **Manifest V3**, this extension leverages native Chrome APIs to ensu
 
 Since this extension is in **Developer Mode**, you need to load it manually into Chrome.
 
-1.  **Clone the Repository**
-    ```bash
-    git clone [https://github.com/your-username/zone-in.git](https://github.com/your-username/zone-in.git)
-    ```
-    *(Or simply download the ZIP and extract it)*
+1.  **Download the Code**
+    * Click the green **Code** button on this page.
+    * Select **Download ZIP**.
+    * Unzip the file to a folder on your computer.
 
 2.  **Open Chrome Extensions**
     * Open Google Chrome.
@@ -49,24 +53,25 @@ Since this extension is in **Developer Mode**, you need to load it manually into
 
 4.  **Load the Extension**
     * Click the **"Load unpacked"** button (top-left).
-    * Select the root folder of this project (`zone-in` or whatever you named the folder).
+    * Select the root folder where you extracted the ZIP file.
 
 5.  **Pin & Use**
     * Click the 🧩 (Puzzle) icon in your Chrome toolbar.
-    * Pin **Zone In** for easy access.
+    * Pin **Be Productive** for easy access.
 
 ## 📂 Project Structure
 
 ```text
-/zone-in
+/be-productive
   ├──manifest.json        # Extension configuration (Manifest V3)
   ├──background.js        # Service worker for URL checking
-  ├──/popup               # UI for the extension popup
-  │   ├──popup.html
-  │   ├──popup.css
-  │   └──popup.js
-  ├──/block-page          # The redirect page for blocked sites
+  ├──/popup               # UI Logic
+  │   ├──popup.html       # The interface
+  │   ├──popup.css        # Styling (Blue theme, rounded UI)
+  │   ├──popup.js         # Logic (Storage, Autocomplete, Icons)
+  │   └──sites.js         # Local database for search suggestions
+  ├──/block-page          # The redirect page
   │   ├──blocked.html
   │   ├──blocked.css
   │   └──blocked.js
-  └──/icon-images         # App icons (16, 32, 48, 128px)
+  └──/images              # App icons & UI Preview

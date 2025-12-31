@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Focus Mode</title>
-  <link rel="stylesheet" href="popup.css"> 
-  </head>
+  <title>Zone In</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
 <body>
 
   <header>
-    <h1>Focus Mode</h1>
-    <p>Stay productive.</p>
+    <h1>Be Productive</h1>
+    <p>Helps you to stay Focused</p>
   </header>
 
   <main>
     <div class="control-panel">
-      <span class="label">Enable Focus</span>
+      <span class="label">Focus Mode</span>
       <label class="switch">
         <input type="checkbox" id="toggle-focus">
         <span class="slider round"></span>
@@ -23,15 +23,20 @@
     </div>
     <div id="status" class="status-indicator">Status: Off</div>
 
-    <div class="input-group">
-      <input type="text" id="site-input" placeholder="youtube.com">
-      <button id="add-btn">Add</button>
+    <div class="search-container">
+      <div class="input-group">
+        <input type="text" id="site-input" placeholder="Type to search (e.g. you...)" autocomplete="off">
+        <button id="add-btn">Add</button>
+      </div>
+      
+      <ul id="suggestions-list" class="suggestions-dropdown hidden"></ul>
     </div>
 
     <h3>Blocked Sites</h3>
     <ul id="site-list" class="site-list"></ul>
   </main>
 
+  <script src="sites.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
