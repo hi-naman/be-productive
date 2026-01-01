@@ -35,6 +35,12 @@ Built using **Manifest V3**, this extension leverages native Chrome APIs to ensu
     * `chrome.storage` (Data persistence)
     * `chrome.scripting`
 
+## 🎥 Setup Walkthrough
+
+Watch this quick video to see how to install **Be Productive** and start blocking distractions in under 60 seconds.
+
+![Setup Demo](images/extension-setup.gif)
+
 ## 🚀 Installation & Setup
 
 Since this extension is in **Developer Mode**, you need to load it manually into Chrome.
