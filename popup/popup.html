@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zone In</title>
+  <title>Be Productive</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
 
   <header>
     <h1>Be Productive</h1>
-    <p>Helps you to stay Focused</p>
+    <p>Track and limit daily website usage</p>
   </header>
 
   <main>
@@ -23,16 +23,37 @@
     </div>
     <div id="status" class="status-indicator">Status: Off</div>
 
+    <!-- UPDATED: Take a Break UI -->
+    <div id="break-section" class="break-container">
+      <button id="take-break-btn" class="break-btn">☕ Take a Break</button>
+      
+      <div id="break-options" class="break-options hidden">
+        <button class="duration-btn" data-time="5">5m</button>
+        <button class="duration-btn" data-time="10">10m</button>
+        <button class="duration-btn" data-time="15">15m</button>
+        <!-- New Custom Options -->
+        <button class="duration-btn" id="custom-break-btn">Custom</button>
+        <input type="number" id="custom-break-input" class="custom-break-input hidden" placeholder="Min" min="1">
+        
+        <button id="cancel-selection-btn" class="cancel-btn">✕</button>
+      </div>
+
+      <div id="break-active-ui" class="break-active hidden">
+        <span class="timer-text">⏳ Break active: <span id="break-timer">00:00</span></span>
+        <button id="stop-break-btn" class="stop-btn">⏹️ Stop</button>
+      </div>
+    </div>
+
     <div class="search-container">
       <div class="input-group">
-        <input type="text" id="site-input" placeholder="Type to search (e.g. you...)" autocomplete="off">
+        <input type="text" id="site-input" placeholder="Type to search (e.g. youtube.com)" autocomplete="off">
         <button id="add-btn">Add</button>
       </div>
       
       <ul id="suggestions-list" class="suggestions-dropdown hidden"></ul>
     </div>
 
-    <h3>Blocked Sites</h3>
+    <h3>Tracked Sites</h3>
     <ul id="site-list" class="site-list"></ul>
   </main>
 

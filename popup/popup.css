@@ -7,14 +7,18 @@
 }
 
 body {
-  width: 320px;
+  width: 420px; 
+  height: 570px; /* Fixed height to prevent extension window expansion */
   background-color: #f4f6f8;
   color: #333;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Disables the homepage vertical scrollbar entirely */
 }
 
 /* Header */
 header {
-  background-color: #2563eb; /* Productivity Blue */
+  background-color: #2563eb; 
   color: white;
   padding: 20px;
   text-align: center;
@@ -27,7 +31,13 @@ header h1 { font-size: 20px; font-weight: 600; margin-bottom: 5px; }
 header p { font-size: 12px; opacity: 0.9; }
 
 /* Main Content */
-main { padding: 20px; }
+main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden; 
+}
 
 /* Toggle Switch Container */
 .control-panel {
@@ -83,6 +93,138 @@ input:checked + .slider:before { transform: translateX(26px); }
   margin-bottom: 15px;
 }
 
+/* --- NEW: Break Feature Styles --- */
+.break-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.break-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.break-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.break-options {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.duration-btn {
+  flex: 1;
+  padding: 8px;
+  background-color: #e2e8f0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #334155;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.duration-btn:hover {
+  background-color: #cbd5e1;
+}
+
+.cancel-btn {
+  padding: 8px 12px;
+  background-color: transparent;
+  color: #94a3b8;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.cancel-btn:hover {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.break-active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.timer-text {
+  flex-grow: 1;
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid #bbf7d0;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* Helper to hide elements */
+.hidden {
+  display: none !important;
+}
+
+/* --- NEW: Custom Break & Stop Button Styles --- */
+.custom-break-input {
+  width: 60px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  background: #f8fafc;
+  color: #334155;
+  transition: border-color 0.2s;
+}
+
+.custom-break-input:focus {
+  border-color: #2563eb;
+  background: #fff;
+}
+
+.site-list button.stop-btn, /* matches standard button weight overrides if any */
+.stop-btn {
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fca5a5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.stop-btn:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
 /* Input Group */
 .input-group {
   display: flex;
@@ -97,9 +239,13 @@ input[type="text"] {
   border-radius: 8px;
   outline: none;
   font-size: 13px;
+  transition: border-color 0.2s;
 }
 
-input[type="text"]:focus { border-color: #2563eb; }
+input[type="text"]:focus { 
+  border-color: #2563eb; 
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
 
 button#add-btn {
   padding: 0 15px;
@@ -110,6 +256,7 @@ button#add-btn {
   cursor: pointer;
   font-weight: 600;
   font-size: 13px;
+  transition: background-color 0.2s;
 }
 
 button#add-btn:hover { background-color: #1d4ed8; }
@@ -119,83 +266,153 @@ h3 { font-size: 14px; color: #555; margin-bottom: 10px; }
 
 .site-list {
   list-style: none;
-  max-height: 250px; 
-  overflow-y: auto; 
+  flex-grow: 1; /* Allows the list box to expand into available space */
+  max-height: 200px; /* Restricts the height so it forces internal scrolling */
+  overflow-y: auto; /* Keeps ONLY the tracked site section scrollable */
   padding-right: 5px;
 }
 
-/* Update the List Item styling */
+/* --- PREMIUM CARD LAYOUT --- */
 .site-list li {
-  background: white;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  display: flex;
+  background: #ffffff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) auto 100px 28px;
   align-items: center;
-  gap: 10px; /* Space between items */
+  gap: 12px; 
   font-size: 13px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  transition: transform 0.1s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
 }
 
 .site-list li:hover {
-  transform: scale(1.01);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  border-color: #e2e8f0;
 }
 
-/* Style the Favicon */
-.site-list li img {
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
+/* Column 1: Site Info */
+.site-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
 }
 
-/* Make text take up available space */
-.site-list li span {
-  flex-grow: 1;
-  font-weight: 500;
-  color: #333;
-}
-
-/* Style the Remove Button */
-.site-list button {
-  background: transparent;
-  color: #94a3b8;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 4px;
+.site-info img {
+  width: 18px;
+  height: 18px;
   border-radius: 4px;
-  line-height: 1;
+  flex-shrink: 0;
 }
 
-.site-list button:hover {
+.site-info span {
+  font-weight: 500;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Column 2: Dropdown & Input Styling */
+.limit-control select, 
+.limit-control input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 12px;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.limit-control select:hover, 
+.limit-control input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  background: #fff;
+}
+
+/* Column 3: Progress Bar Upgrades */
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.progress-bg {
+  width: 100%;
+  height: 8px; /* Slightly thicker */
+  background-color: #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 8px; /* Round the inner bar too */
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+.fill-green { background-color: #10b981; } /* Modern Emerald Green */
+.fill-red { background-color: #ef4444; } /* Soft Red */
+
+.time-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+/* Column 4: Remove Button Upgrades */
+.site-list button.remove-btn {
+  background: transparent;
+  color: #cbd5e1;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Make it circular */
+  transition: all 0.2s ease;
+}
+
+.site-list button.remove-btn:hover {
   background: #fee2e2;
   color: #ef4444;
+  transform: rotate(90deg); /* Playful hover interaction */
 }
 
-/* Add these styles to your existing popup.css */
-
-.search-container {
-  position: relative;
-}
+/* Search Dropdown (Unchanged) */
+.search-container { position: relative; }
 
 .suggestions-dropdown {
   position: absolute;
-  top: 40px; /* Just below the input box */
+  top: 40px; 
   left: 0;
   right: 0;
   background: white;
   border: 1px solid #ddd;
   border-radius: 8px;
   list-style: none;
-  z-index: 100; /* Float above everything else */
+  z-index: 100; 
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   overflow: hidden;
 }
 
-.suggestions-dropdown.hidden {
-  display: none;
-}
+.suggestions-dropdown.hidden { display: none; }
 
 .suggestions-dropdown li {
   padding: 10px;
@@ -207,21 +424,21 @@ h3 { font-size: 14px; color: #555; margin-bottom: 10px; }
   font-size: 13px;
 }
 
-.suggestions-dropdown li:last-child {
-  border-bottom: none;
+.suggestions-dropdown li:last-child { border-bottom: none; }
+.suggestions-dropdown li:hover { background-color: #f0f9ff; }
+.suggestions-dropdown img { width: 16px; height: 16px; border-radius: 2px; }
+.suggestions-dropdown span small { color: #888; margin-left: 5px; }
+
+/* Custom scrollbar for the site list to make it look cleaner */
+.site-list::-webkit-scrollbar {
+  width: 6px;
 }
 
-.suggestions-dropdown li:hover {
-  background-color: #f0f9ff;
+.site-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.suggestions-dropdown img {
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-}
-
-.suggestions-dropdown span small {
-  color: #888;
-  margin-left: 5px;
+.site-list::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
 }
